@@ -7,12 +7,18 @@ class TableReader():
         self.name = "Google Scraper"
         self.key = []
         self.pc1 = []
+        self.pc2 = []
         self.c_d_shifts = []
 
         with open('tables/pc1.csv', newline='') as file:
             reader = csv.reader(file)
             for row in reader:
                 self.pc1.append(row)
+
+        with open('tables/pc2.csv', newline='') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                self.pc2.append(row)
 
         with open('tables/sample_key.txt', newline='') as file:
             self.key = file.read()
@@ -26,6 +32,9 @@ class TableReader():
 
     def get_pc1(self):
         return self.pc1
+
+    def get_pc2(self):
+        return self.pc2
 
     def get_c_d_shifts(self):
         return self.c_d_shifts
