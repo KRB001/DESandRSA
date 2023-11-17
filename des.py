@@ -12,4 +12,6 @@ def encrypt(message, key):
     c_blocks = get_blocks(c0)
     d_blocks = get_blocks(d0)
 
+    subkeys = calculate_subkeys(c_blocks, d_blocks)
+
     return result
