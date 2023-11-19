@@ -4,15 +4,6 @@ pc1_table = table_reader.get_pc1()
 pc2_table = table_reader.get_pc2()
 shifts = table_reader.get_c_d_shifts()
 
-
-def pc1_permute(key):
-    pc1 = ""
-    for r in range(len(pc1_table)):
-        for c in range(len(pc1_table[r])):
-            pc1 = pc1 + (key[int(pc1_table[r][c]) - 1])
-
-    return pc1
-
 def left_shift(message):
     first = message[0]
     result = message[1:]
@@ -29,18 +20,19 @@ def get_blocks(block):
 
     return blocks
 
-def pc2_permute(pair):
+def permute(table, message):
     subkey = ""
-    for r in range(len(pc2_table)):
-        for c in range(len(pc2_table[r])):
-            subkey = subkey + (pair[int(pc2_table[r][c]) - 1])
+    for r in range(len(table)):
+        for c in range(len(table[r])):
+            print(table[r][c])
+            subkey = subkey + (message[int(table[r][c]) - 1])
     return subkey
 
 def calculate_subkeys(c_blocks,d_blocks):
     subkeys = []
     for i in range(len(c_blocks)):
         cd_pair = c_blocks[i] + d_blocks[i]
-        subkey = pc2_permute(cd_pair)
+        subkey = permute(pc2_table, cd_pair)
         subkeys.append(subkey)
     return subkeys
 
