@@ -13,6 +13,8 @@ class TableReader():
         self.c_d_shifts = []
         self.ip = []
         self.e = []
+        self.p = []
+        self.ip1 = []
 
         with open('tables/pc1.csv', newline='') as file:
             reader = csv.reader(file)
@@ -42,6 +44,16 @@ class TableReader():
                     s.append(row)
                 self.s_tables.append(s)
 
+        with open('tables/p.csv', newline='') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                self.p.append(row)
+
+        with open('tables/ip-1.csv', newline='') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                self.ip1.append(row)
+
         with open('tables/sample_key.txt', newline='') as file:
             self.key = file.read()
             self.key = ascii_to_binary(self.key)
@@ -67,6 +79,12 @@ class TableReader():
 
     def get_e(self):
         return self.e
+
+    def get_p(self):
+        return self.p
+
+    def get_ip1(self):
+        return self.ip1
 
     def get_s_tables(self):
         return self.s_tables
