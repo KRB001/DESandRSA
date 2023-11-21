@@ -9,6 +9,7 @@ class TableReader():
         self.key = ""
         self.pc1 = []
         self.pc2 = []
+        self.s_tables = []
         self.c_d_shifts = []
         self.ip = []
         self.e = []
@@ -32,6 +33,14 @@ class TableReader():
             reader = csv.reader(file)
             for row in reader:
                 self.e.append(row)
+
+        for i in range(8):
+            with open('tables/s' + str(i+1) + '.csv', newline='') as file:
+                s = []
+                reader = csv.reader(file)
+                for row in reader:
+                    s.append(row)
+                self.s_tables.append(s)
 
         with open('tables/sample_key.txt', newline='') as file:
             self.key = file.read()
@@ -58,6 +67,9 @@ class TableReader():
 
     def get_e(self):
         return self.e
+
+    def get_s_tables(self):
+        return self.s_tables
 
     def get_c_d_shifts(self):
         return self.c_d_shifts

@@ -24,7 +24,6 @@ def permute(table, message):
     subkey = ""
     for r in range(len(table)):
         for c in range(len(table[r])):
-            print(table[r][c])
             subkey = subkey + (message[int(table[r][c]) - 1])
     return subkey
 
