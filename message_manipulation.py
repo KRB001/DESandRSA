@@ -7,10 +7,12 @@ def get_lr_blocks(l0, r0, subkeys):
     l_block = r0
     r_block = xor(l0, grind(r0, subkeys[0]))
 
-    for i in range(len(subkeys) - 1):
+    for i in range(len(subkeys) - 2):
         temp = l_block
         l_block = r_block
-        r_block = xor(temp, grind(r0, subkeys[i + 1]))
+        r_block = xor(temp, grind(r_block, subkeys[i + 1]))
+
+    l_block = xor(l_block, grind(r_block, subkeys[15]))
 
     return [l_block, r_block]
 
@@ -36,11 +38,6 @@ def grind(r0, subkey):
         column = int(column_dec, 2)
 
         s_number = s_tables[i][row][column]
-        #print("Chunk " + str(i) +
-        #      ": Row " + str(row_dec) + " / " + str(row) +
-        #      ", Column " + str(column_dec) + " / " + str(column)
-        #      + " / VALUE: " + str(s_number)
-        #)
 
         result = result + str(bin(int(s_number))[2:].zfill(4))
 
