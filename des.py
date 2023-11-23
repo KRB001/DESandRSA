@@ -16,8 +16,8 @@ def encrypt(message, key):
     # pad the last block if less than 8 bytes
     if residual > 0:
         final_block = message[length*8:length*8+residual]
-        for i in range(residual):
-            final_block = final_block + " "
+        for i in range(8 - residual):
+            final_block = final_block + "-"
 
         result = result + encrypt_block(final_block, key)
 
@@ -25,12 +25,12 @@ def encrypt(message, key):
 
 def decrypt(message, key):
     result = ""
-    length = len(message) // 16
+    length = len(message) // 18
 
     for i in range(length):
-        result = result + decrypt_block(message[i*16:i*16+16], key)
+        result = result + decrypt_block(message[i*18:i*18+18], key)
 
-    return result
+    return result.strip("-")
 
 def encrypt_block(message, key):
     key = ascii_to_binary(key)
